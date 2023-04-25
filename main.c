@@ -1,18 +1,20 @@
-#include "main.h"
+#include "shell.h"
 
-int main(int ac, char **argv)
+/**
+ * main - function that checks if our shell is called
+ *
+ * Return: 0 on success
+ */
+int main(void)
 {
-  char *command_line = "(Demo_shell) $ ";
-  char *lineptr;
-  size_t n = 0; 
-
- 
- (void)ac; (void)argv;
-
-  printf("%s", command_line);
-  getline(&lineptr, &n, stdin);
-  printf("%s\n", lineptr);
-
-  free(lineptr);
-  return (0);
+	/* determines if file descriptor is associated with a terminal */
+	if (isatty(STDIN_FILENO) == 1)
+	{
+		shell_interactive();
+	}
+	else
+	{
+		shell_no_interactive();
+	}
+	return (0);
 }
